@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Header Modifier Extension",
+  "version": "1.0",
+  "permissions": ["webRequest", "webRequestBlocking", "activeTab", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "host_permissions": [
+    {
+      "host_and_subdomains": ["<all_urls>"],
+      "headers": ["request", "blocking"]
+    }
+  ]
+}
