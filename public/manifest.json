@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Header Modifier Extension",
+  "version": "1.2",
+  "permissions": [
+    "webRequest",
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
