@@ -17,6 +17,26 @@
 // );
 
 
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//     if (request.action == "modifyHeaders") {
+//       // Fetch the headers and make changes
+//       chrome.storage.sync.get(request.url, (items) => {
+//         const headers = request.headers;
+//
+//         for (const header of headers) {
+//           if (items[header.name] !== undefined) {
+//             header.value = items[header.name];
+//           }
+//         }
+//
+//         // Send the modified headers back to the content script
+//         sendResponse({ headers });
+//       });
+//     }
+//   }
+// );
+
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.action == "modifyHeaders") {
@@ -24,9 +44,10 @@ chrome.runtime.onMessage.addListener(
       chrome.storage.sync.get(request.url, (items) => {
         const headers = request.headers;
 
-        for (const header of headers) {
+        for (let i = 0; i < headers.length; i++) {
+          const header = headers[i];
           if (items[header.name] !== undefined) {
-            header.value = items[header.name];
+            headers[i].value = items[header.name];
           }
         }
 
@@ -36,3 +57,4 @@ chrome.runtime.onMessage.addListener(
     }
   }
 );
+

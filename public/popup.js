@@ -37,22 +37,38 @@
 //   });
 // });
 
+// chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+//   if (tabs && tabs.length > 0) {
+//     const activeTab = tabs[0];
+//     chrome.scripting.executeScript({
+//       target: { tabId: activeTab.id },
+//       function: (url) => {
+//         // Trigger the content script to modify headers
+//         chrome.runtime.sendMessage({ action: "modifyHeaders", url: url }, (response) => {
+//           // Handle the response if needed
+//         });
+//       },
+//       args: [activeTab.url]
+//     });
+//   } else {
+//     // Handle the case where no active tab is found
+//     console.error("No active tab found.");
+//   }
+// });
+
+
+console.log("start of code");
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   if (tabs && tabs.length > 0) {
     const activeTab = tabs[0];
-    chrome.scripting.executeScript({
-      target: { tabId: activeTab.id },
-      function: (url) => {
-        // Trigger the content script to modify headers
-        chrome.runtime.sendMessage({ action: "modifyHeaders", url: url }, (response) => {
-          // Handle the response if needed
-        });
-      },
-      args: [activeTab.url]
-    });
+    // Ensure the activeTab and its URL are available
+    if (activeTab && activeTab.url) {
+      console.log("activeTab found");
+    } else {
+      console.error("Active tab or URL not found.");
+    }
   } else {
     // Handle the case where no active tab is found
     console.error("No active tab found.");
   }
 });
-
